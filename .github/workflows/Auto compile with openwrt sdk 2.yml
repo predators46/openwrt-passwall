@@ -92,7 +92,7 @@ jobs:
         uses: actions/cache@v4
         with:
           path: sdk
-          key: openwrt-sdk-23.05.2-x86-64
+          key: openwrt-sdk-23.05.1-x86-64
 
       - name: Initialization environment
         if: steps.cache-sdk.outputs.cache-hit != 'true'
