@@ -4,6 +4,7 @@ local appname = "passwall"
 
 local var = api.get_args(arg)
 local FLAG = var["-FLAG"]
+local DNSMASQ_CONF_DIR = var["-DNSMASQ_CONF_DIR"]
 local TMP_DNSMASQ_PATH = var["-TMP_DNSMASQ_PATH"]
 local DNSMASQ_CONF_FILE = var["-DNSMASQ_CONF_FILE"]
 local DEFAULT_DNS = var["-DEFAULT_DNS"]
@@ -189,12 +190,13 @@ local setflag_4= (NFTFLAG == "1") and "4#inet#passwall#" or ""
 local setflag_6= (NFTFLAG == "1") and "6#inet#passwall#" or ""
 
 if not fs.access(CACHE_DNS_PATH) then
-	fs.mkdir("/tmp/dnsmasq.d")
+	fs.mkdir(DNSMASQ_CONF_DIR)
 	fs.mkdir(CACHE_DNS_PATH)
 
 	--屏蔽列表
 	if USE_BLOCK_LIST == "1" then
 		for line in io.lines("/usr/share/passwall/rules/block_host") do
+			line = api.get_std_domain(line)
 			if line ~= "" and not line:find("#") then
 				set_domain_address(line, "")
 			end
@@ -233,6 +235,7 @@ if not fs.access(CACHE_DNS_PATH) then
 			if fwd_dns then
 				--始终用国内DNS解析直连（白名单）列表
 				for line in io.lines("/usr/share/passwall/rules/direct_host") do
+					line = api.get_std_domain(line)
 					if line ~= "" and not line:find("#") then
 						add_excluded_domain(line)
 						set_domain_dns(line, fwd_dns)
@@ -254,6 +257,7 @@ if not fs.access(CACHE_DNS_PATH) then
 			if fwd_dns then
 				--始终使用远程DNS解析代理（黑名单）列表
 				for line in io.lines("/usr/share/passwall/rules/proxy_host") do
+					line = api.get_std_domain(line)
 					if line ~= "" and not line:find("#") then
 						add_excluded_domain(line)
 						local ipset_flag = setflag_4 .. "passwall_blacklist," .. setflag_6 .. "passwall_blacklist6"
