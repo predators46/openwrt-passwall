@@ -19,7 +19,7 @@ on:
 env:
   TZ: Asia/Makassar
   passwall: ${{ github.repository }}
-  packages: esaaprillia/openwrt-passwall-packages
+  packages: predators46/openwrt-passwall-packages
 
 
 jobs:
@@ -58,7 +58,7 @@ jobs:
           echo "![](https://img.shields.io/github/downloads/${{ env.passwall }}/${{steps.check_version.outputs.latest_version}}/total?style=flat-square)" >> release.txt
           echo "### Passwall Info" >> release.txt
           echo "**:minidisc: Passwall Version: ${{steps.check_version.outputs.latest_version}}**" >> release.txt
-          echo "**:gear: OpenWrt SDK Version: 23.05.4**" >> release.txt
+          echo "**:gear: OpenWrt SDK Version: 24.10.0-rc1**" >> release.txt
           touch release.txt
 
       - name: Generate new tag & release
@@ -83,17 +83,17 @@ jobs:
           sudo -E rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d /usr/local/lib/android
           echo "Install packages"
           sudo -E apt-get -qq update
-          sudo -E apt-get -qq install build-essential clang flex bison g++ gawk gcc-multilib g++-multilib gettext git libncurses5-dev libssl-dev python3-distutils rsync unzip zlib1g-dev file wget
+          sudo -E apt-get -qq install build-essential clang flex bison g++ gawk gcc-multilib g++-multilib gettext git libncurses5-dev libssl-dev python3-setuptools rsync swig unzip zlib1g-dev file wget
           sudo -E apt-get -qq autoremove --purge
           sudo -E apt-get -qq clean
 
       - name: Initialization environment
         env:
-          url_sdk: https://downloads.openwrt.org/releases/23.05.4/targets/x86/64/openwrt-sdk-23.05.4-x86-64_gcc-12.3.0_musl.Linux-x86_64.tar.xz
+          url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/x86/64/openwrt-sdk-24.10.0-rc1-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
         run: |
           wget ${{ env.url_sdk }}
           file_name=$(echo ${{env.url_sdk}} | awk -F/ '{print $NF}')
-          mkdir sdk && tar -xJf $file_name -C ./sdk --strip-components=1
+          mkdir sdk && tar -xf $file_name -C ./sdk --strip-components=1
           cd sdk
           echo "src-git passwall_packages https://github.com/${{ env.packages }}.git;main" >> feeds.conf.default
           echo "src-git passwall https://github.com/${{ env.passwall }}.git;main" >> feeds.conf.default
@@ -170,55 +170,55 @@ jobs:
       matrix:
         include:
           - platform: x86_64
-            url_sdk: https://downloads.openwrt.org/releases/23.05.4/targets/x86/64/openwrt-sdk-23.05.4-x86-64_gcc-12.3.0_musl.Linux-x86_64.tar.xz
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/x86/64/openwrt-sdk-24.10.0-rc1-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
           - platform: aarch64_generic
-            url_sdk: https://downloads.openwrt.org/releases/23.05.4/targets/rockchip/armv8/openwrt-sdk-23.05.4-rockchip-armv8_gcc-12.3.0_musl.Linux-x86_64.tar.xz
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/rockchip/armv8/openwrt-sdk-24.10.0-rc1-rockchip-armv8_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
           - platform: aarch64_cortex-a53
-            url_sdk: https://downloads.openwrt.org/releases/23.05.4/targets/mvebu/cortexa53/openwrt-sdk-23.05.4-mvebu-cortexa53_gcc-12.3.0_musl.Linux-x86_64.tar.xz
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/mvebu/cortexa53/openwrt-sdk-24.10.0-rc1-mvebu-cortexa53_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
           - platform: aarch64_cortex-a72
-            url_sdk: https://downloads.openwrt.org/releases/23.05.4/targets/mvebu/cortexa72/openwrt-sdk-23.05.4-mvebu-cortexa72_gcc-12.3.0_musl.Linux-x86_64.tar.xz
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/mvebu/cortexa72/openwrt-sdk-24.10.0-rc1-mvebu-cortexa72_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
           - platform: arm_cortex-a7
-            url_sdk: https://downloads.openwrt.org/releases/23.05.4/targets/mediatek/mt7629/openwrt-sdk-23.05.4-mediatek-mt7629_gcc-12.3.0_musl_eabi.Linux-x86_64.tar.xz
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/mediatek/mt7629/openwrt-sdk-24.10.0-rc1-mediatek-mt7629_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst
 
           - platform: arm_cortex-a7_neon-vfpv4
-            url_sdk: https://downloads.openwrt.org/releases/23.05.4/targets/sunxi/cortexa7/openwrt-sdk-23.05.4-sunxi-cortexa7_gcc-12.3.0_musl_eabi.Linux-x86_64.tar.xz
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/sunxi/cortexa7/openwrt-sdk-24.10.0-rc1-sunxi-cortexa7_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst
 
           - platform: arm_cortex-a8_vfpv3
-            url_sdk: https://downloads.openwrt.org/releases/23.05.4/targets/sunxi/cortexa8/openwrt-sdk-23.05.4-sunxi-cortexa8_gcc-12.3.0_musl_eabi.Linux-x86_64.tar.xz
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/sunxi/cortexa8/openwrt-sdk-24.10.0-rc1-sunxi-cortexa8_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst
 
           - platform: arm_cortex-a9
-            url_sdk: https://downloads.openwrt.org/releases/23.05.4/targets/bcm53xx/generic/openwrt-sdk-23.05.4-bcm53xx-generic_gcc-12.3.0_musl_eabi.Linux-x86_64.tar.xz
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/bcm53xx/generic/openwrt-sdk-24.10.0-rc1-bcm53xx-generic_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst
 
           - platform: arm_cortex-a9_neon
-            url_sdk: https://downloads.openwrt.org/releases/23.05.4/targets/zynq/generic/openwrt-sdk-23.05.4-zynq-generic_gcc-12.3.0_musl_eabi.Linux-x86_64.tar.xz
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/zynq/generic/openwrt-sdk-24.10.0-rc1-zynq-generic_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst
 
           - platform: arm_cortex-a9_vfpv3-d16
-            url_sdk: https://downloads.openwrt.org/releases/23.05.4/targets/mvebu/cortexa9/openwrt-sdk-23.05.4-mvebu-cortexa9_gcc-12.3.0_musl_eabi.Linux-x86_64.tar.xz
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/mvebu/cortexa9/openwrt-sdk-24.10.0-rc1-mvebu-cortexa9_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst
 
           - platform: arm_cortex-a15_neon-vfpv4
-            url_sdk: https://downloads.openwrt.org/releases/23.05.4/targets/ipq806x/generic/openwrt-sdk-23.05.4-ipq806x-generic_gcc-12.3.0_musl_eabi.Linux-x86_64.tar.xz
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/ipq806x/generic/openwrt-sdk-24.10.0-rc1-ipq806x-generic_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst
 
           - platform: mips_24kc
-            url_sdk: https://downloads.openwrt.org/releases/23.05.4/targets/ath79/generic/openwrt-sdk-23.05.4-ath79-generic_gcc-12.3.0_musl.Linux-x86_64.tar.xz
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/ath79/generic/openwrt-sdk-24.10.0-rc1-ath79-generic_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
           - platform: mips_4kec
-            url_sdk: https://downloads.openwrt.org/releases/23.05.4/targets/realtek/rtl838x/openwrt-sdk-23.05.4-realtek-rtl838x_gcc-12.3.0_musl.Linux-x86_64.tar.xz
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/realtek/rtl838x/openwrt-sdk-24.10.0-rc1-realtek-rtl838x_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
           - platform: mips_mips32
-            url_sdk: https://downloads.openwrt.org/releases/23.05.4/targets/bcm63xx/generic/openwrt-sdk-23.05.4-bcm63xx-generic_gcc-12.3.0_musl.Linux-x86_64.tar.xz
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/bcm63xx/generic/openwrt-sdk-24.10.0-rc1-bcm63xx-generic_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
           - platform: mipsel_24kc
-            url_sdk: https://downloads.openwrt.org/releases/23.05.4/targets/ramips/rt288x/openwrt-sdk-23.05.4-ramips-rt288x_gcc-12.3.0_musl.Linux-x86_64.tar.xz
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/ramips/rt288x/openwrt-sdk-24.10.0-rc1-ramips-rt288x_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
           - platform: mipsel_74kc
-            url_sdk: https://downloads.openwrt.org/releases/23.05.4/targets/ramips/rt3883/openwrt-sdk-23.05.4-ramips-rt3883_gcc-12.3.0_musl.Linux-x86_64.tar.xz
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/ramips/rt3883/openwrt-sdk-24.10.0-rc1-ramips-rt3883_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
           - platform: mipsel_mips32
-            url_sdk: https://downloads.openwrt.org/releases/23.05.4/targets/bcm47xx/generic/openwrt-sdk-23.05.4-bcm47xx-generic_gcc-12.3.0_musl.Linux-x86_64.tar.xz
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/bcm47xx/generic/openwrt-sdk-24.10.0-rc1-bcm47xx-generic_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
     steps:
       - name: Initialization ${{ matrix.platform }} compile environment
@@ -227,7 +227,7 @@ jobs:
           sudo -E rm -rf /usr/share/dotnet /etc/mysql /etc/php /etc/apt/sources.list.d /usr/local/lib/android
           echo "install packages!!!!!!"
           sudo -E apt-get -qq update
-          sudo -E apt-get -qq install $(curl -fsSL https://github.com/smallprogram/OpenWrtAction/raw/main/diy_script/official_dependence)
+          sudo -E apt-get -qq install build-essential clang flex bison g++ gawk gcc-multilib g++-multilib gettext git libncurses5-dev libssl-dev python3-setuptools rsync swig unzip zlib1g-dev file wget
           sudo -E apt-get -qq autoremove --purge
           sudo -E apt-get -qq clean
 
@@ -235,7 +235,7 @@ jobs:
         run: |
           wget ${{ matrix.url_sdk }}
           file_name=$(echo ${{matrix.url_sdk}} | awk -F/ '{print $NF}')
-          mkdir sdk && tar -xJf $file_name -C ./sdk --strip-components=1
+          mkdir sdk && tar -xf $file_name -C ./sdk --strip-components=1
           cd sdk
 
       - name: SSH connection to Actions
@@ -318,7 +318,7 @@ jobs:
           echo "![](https://img.shields.io/github/downloads/${{ env.passwall }}/${{needs.job_check.outputs.passwall_version}}/total?style=flat-square)" >> release.txt
           echo "### Passwall Info" >> release.txt
           echo "**:minidisc: Passwall Version: ${{needs.job_check.outputs.passwall_version}}**" >> release.txt
-          echo "**:gear: OpenWrt SDK Version: 23.05.4**" >> release.txt
+          echo "**:gear: OpenWrt SDK Version: 24.10.0-rc1**" >> release.txt
 
           echo "### Packages Version" >> release.txt
           echo "**package name**|**package version**" >> release.txt
