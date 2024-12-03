@@ -58,7 +58,7 @@ jobs:
           echo "![](https://img.shields.io/github/downloads/${{ env.passwall }}/${{steps.check_version.outputs.latest_version}}/total?style=flat-square)" >> release.txt
           echo "### Passwall Info" >> release.txt
           echo "**:minidisc: Passwall Version: ${{steps.check_version.outputs.latest_version}}**" >> release.txt
-          echo "**:gear: OpenWrt SDK Version: 24.10.0-rc1**" >> release.txt
+          echo "**:gear: OpenWrt SDK Version: 24.10.0-rc2**" >> release.txt
           touch release.txt
 
       - name: Generate new tag & release
@@ -89,7 +89,7 @@ jobs:
 
       - name: Initialization environment
         env:
-          url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/x86/64/openwrt-sdk-24.10.0-rc1-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+          url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/x86/64/openwrt-sdk-24.10.0-rc2-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
         run: |
           wget ${{ env.url_sdk }}
           file_name=$(echo ${{env.url_sdk}} | awk -F/ '{print $NF}')
@@ -170,55 +170,55 @@ jobs:
       matrix:
         include:
           - platform: x86_64
-            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/x86/64/openwrt-sdk-24.10.0-rc1-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/x86/64/openwrt-sdk-24.10.0-rc2-x86-64_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
           - platform: aarch64_generic
-            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/rockchip/armv8/openwrt-sdk-24.10.0-rc1-rockchip-armv8_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/rockchip/armv8/openwrt-sdk-24.10.0-rc2-rockchip-armv8_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
           - platform: aarch64_cortex-a53
-            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/mvebu/cortexa53/openwrt-sdk-24.10.0-rc1-mvebu-cortexa53_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/mvebu/cortexa53/openwrt-sdk-24.10.0-rc2-mvebu-cortexa53_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
           - platform: aarch64_cortex-a72
-            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/mvebu/cortexa72/openwrt-sdk-24.10.0-rc1-mvebu-cortexa72_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/mvebu/cortexa72/openwrt-sdk-24.10.0-rc2-mvebu-cortexa72_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
           - platform: arm_cortex-a7
-            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/mediatek/mt7629/openwrt-sdk-24.10.0-rc1-mediatek-mt7629_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/mediatek/mt7629/openwrt-sdk-24.10.0-rc2-mediatek-mt7629_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst
 
           - platform: arm_cortex-a7_neon-vfpv4
-            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/sunxi/cortexa7/openwrt-sdk-24.10.0-rc1-sunxi-cortexa7_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/sunxi/cortexa7/openwrt-sdk-24.10.0-rc2-sunxi-cortexa7_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst
 
           - platform: arm_cortex-a8_vfpv3
-            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/sunxi/cortexa8/openwrt-sdk-24.10.0-rc1-sunxi-cortexa8_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/sunxi/cortexa8/openwrt-sdk-24.10.0-rc2-sunxi-cortexa8_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst
 
           - platform: arm_cortex-a9
-            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/bcm53xx/generic/openwrt-sdk-24.10.0-rc1-bcm53xx-generic_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/bcm53xx/generic/openwrt-sdk-24.10.0-rc2-bcm53xx-generic_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst
 
           - platform: arm_cortex-a9_neon
-            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/zynq/generic/openwrt-sdk-24.10.0-rc1-zynq-generic_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/zynq/generic/openwrt-sdk-24.10.0-rc2-zynq-generic_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst
 
           - platform: arm_cortex-a9_vfpv3-d16
-            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/mvebu/cortexa9/openwrt-sdk-24.10.0-rc1-mvebu-cortexa9_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/mvebu/cortexa9/openwrt-sdk-24.10.0-rc2-mvebu-cortexa9_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst
 
           - platform: arm_cortex-a15_neon-vfpv4
-            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/ipq806x/generic/openwrt-sdk-24.10.0-rc1-ipq806x-generic_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/ipq806x/generic/openwrt-sdk-24.10.0-rc2-ipq806x-generic_gcc-13.3.0_musl_eabi.Linux-x86_64.tar.zst
 
           - platform: mips_24kc
-            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/ath79/generic/openwrt-sdk-24.10.0-rc1-ath79-generic_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/ath79/generic/openwrt-sdk-24.10.0-rc2-ath79-generic_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
           - platform: mips_4kec
-            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/realtek/rtl838x/openwrt-sdk-24.10.0-rc1-realtek-rtl838x_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/realtek/rtl838x/openwrt-sdk-24.10.0-rc2-realtek-rtl838x_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
           - platform: mips_mips32
-            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/bcm63xx/generic/openwrt-sdk-24.10.0-rc1-bcm63xx-generic_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/bcm63xx/generic/openwrt-sdk-24.10.0-rc2-bcm63xx-generic_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
           - platform: mipsel_24kc
-            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/ramips/rt288x/openwrt-sdk-24.10.0-rc1-ramips-rt288x_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/ramips/rt288x/openwrt-sdk-24.10.0-rc2-ramips-rt288x_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
           - platform: mipsel_74kc
-            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/ramips/rt3883/openwrt-sdk-24.10.0-rc1-ramips-rt3883_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/ramips/rt3883/openwrt-sdk-24.10.0-rc2-ramips-rt3883_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
           - platform: mipsel_mips32
-            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc1/targets/bcm47xx/generic/openwrt-sdk-24.10.0-rc1-bcm47xx-generic_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/bcm47xx/generic/openwrt-sdk-24.10.0-rc2-bcm47xx-generic_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
     steps:
       - name: Initialization ${{ matrix.platform }} compile environment
@@ -318,7 +318,7 @@ jobs:
           echo "![](https://img.shields.io/github/downloads/${{ env.passwall }}/${{needs.job_check.outputs.passwall_version}}/total?style=flat-square)" >> release.txt
           echo "### Passwall Info" >> release.txt
           echo "**:minidisc: Passwall Version: ${{needs.job_check.outputs.passwall_version}}**" >> release.txt
-          echo "**:gear: OpenWrt SDK Version: 24.10.0-rc1**" >> release.txt
+          echo "**:gear: OpenWrt SDK Version: 24.10.0-rc2**" >> release.txt
 
           echo "### Packages Version" >> release.txt
           echo "**package name**|**package version**" >> release.txt
