@@ -209,7 +209,7 @@ jobs:
             url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/realtek/rtl838x/openwrt-sdk-24.10.0-rc2-realtek-rtl838x_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
           - platform: mips_mips32
-            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/bcm63xx/generic/openwrt-sdk-24.10.0-rc2-bcm63xx-generic_gcc-13.3.0_musl.Linux-x86_64.tar.zst
+            url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/bmips/bcm6358/openwrt-sdk-24.10.0-rc2-bmips-bcm6358_gcc-13.3.0_musl.Linux-x86_64.tar.zst
 
           - platform: mipsel_24kc
             url_sdk: https://downloads.openwrt.org/releases/24.10.0-rc2/targets/ramips/rt288x/openwrt-sdk-24.10.0-rc2-ramips-rt288x_gcc-13.3.0_musl.Linux-x86_64.tar.zst
